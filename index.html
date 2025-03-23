@@ -39,27 +39,33 @@
         const appParam = getQueryParam('apps');
         const contentContainer = document.getElementById('content');
 
-        // Fungsi untuk menampilkan link aplikasi
+        // Fungsi untuk menampilkan link aplikasi dan redirect otomatis
         function displayAppLink(appUrl) {
             let content = '';
             if (appUrl) {
                 content = `
                     <div class="app-container">
-                        <div class="app-title">App: Google Script</div>
-                        <p>Redirecting to Google Apps Script...</p>
-                        <a href="${appUrl}" target="_blank">Click here if not redirected automatically.</a>
+                        <div class="app-title">Redirecting to Google Apps Script...</div>
+                        <p>Click below if you are not redirected automatically:</p>
+                        <a href="${appUrl}" target="_blank">Go to Google Apps Script</a>
                     </div>
                 `;
-                // Redirect secara otomatis ke URL jika ada
-                window.location.href = appUrl;
+                // Redirect secara otomatis ke URL yang ditentukan dalam parameter
+                setTimeout(() => {
+                    window.location.href = appUrl;
+                }, 2000); // Mengarahkan setelah 2 detik
             } else {
                 content = `<p>No app URL specified. Please add the 'apps' parameter in the URL.</p>`;
             }
             contentContainer.innerHTML = content;
         }
 
-        // Menampilkan link aplikasi berdasarkan parameter 'apps'
-        displayAppLink(appParam);
+        // Menampilkan aplikasi sesuai dengan parameter 'apps'
+        if (appParam) {
+            displayAppLink(appParam); // Menampilkan aplikasi dengan URL yang diberikan
+        } else {
+            contentContainer.innerHTML = `<p>No 'apps' parameter found in the URL. Please provide a valid URL parameter.</p>`;
+        }
     </script>
 </body>
 </html>
