@@ -24,7 +24,9 @@
 </head>
 <body>
     <h1>Welcome to the Demo Page</h1>
-    <div class="content" id="content"></div>
+    <div class="content" id="content">
+        <!-- This is where the content will be dynamically loaded -->
+    </div>
 
     <script>
         // Fungsi untuk mendapatkan parameter URL
@@ -37,22 +39,27 @@
         const appParam = getQueryParam('apps');
         const contentContainer = document.getElementById('content');
 
-        // Fungsi untuk menampilkan aplikasi sesuai dengan parameter
-        function displayApp(appName) {
+        // Fungsi untuk menampilkan link aplikasi
+        function displayAppLink(appUrl) {
             let content = '';
-            if (appName) {
-                content = `<div class="app-container">
-                    <div class="app-title">App: ${appName}</div>
-                    <p>This is the content for ${appName} app.</p>
-                </div>`;
+            if (appUrl) {
+                content = `
+                    <div class="app-container">
+                        <div class="app-title">App: Google Script</div>
+                        <p>Redirecting to Google Apps Script...</p>
+                        <a href="${appUrl}" target="_blank">Click here if not redirected automatically.</a>
+                    </div>
+                `;
+                // Redirect secara otomatis ke URL jika ada
+                window.location.href = appUrl;
             } else {
-                content = `<p>No app specified. Please add a parameter in the URL like ?apps=yourAppName.</p>`;
+                content = `<p>No app URL specified. Please add the 'apps' parameter in the URL.</p>`;
             }
             contentContainer.innerHTML = content;
         }
 
-        // Menampilkan konten berdasarkan parameter 'apps'
-        displayApp(appParam);
+        // Menampilkan link aplikasi berdasarkan parameter 'apps'
+        displayAppLink(appParam);
     </script>
 </body>
 </html>
