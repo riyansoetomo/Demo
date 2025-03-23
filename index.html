@@ -1,19 +1,58 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Domain</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Demo Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .app-container {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        .app-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Demo Domain</h1>
-        <input type="text" id="domainInput" placeholder="Masukkan URL domain">
-        <button onclick="loadDomain()">Tampilkan</button>
-        <iframe id="iframeDisplay" src="" frameborder="0"></iframe>
-    </div>
-    <script src="script.js"></script>
+    <h1>Welcome to the Demo Page</h1>
+    <div class="content" id="content"></div>
+
+    <script>
+        // Fungsi untuk mendapatkan parameter URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Ambil nilai parameter 'apps' dari URL
+        const appParam = getQueryParam('apps');
+        const contentContainer = document.getElementById('content');
+
+        // Fungsi untuk menampilkan aplikasi sesuai dengan parameter
+        function displayApp(appName) {
+            let content = '';
+            if (appName) {
+                content = `<div class="app-container">
+                    <div class="app-title">App: ${appName}</div>
+                    <p>This is the content for ${appName} app.</p>
+                </div>`;
+            } else {
+                content = `<p>No app specified. Please add a parameter in the URL like ?apps=yourAppName.</p>`;
+            }
+            contentContainer.innerHTML = content;
+        }
+
+        // Menampilkan konten berdasarkan parameter 'apps'
+        displayApp(appParam);
+    </script>
 </body>
 </html>
-
