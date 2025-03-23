@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo GitHub Pages</title>
+</head>
+<body>
+    <h1>Halaman Demo</h1>
+    <p id="output"></p>
+
+    <script>
+        // Ambil parameter dari URL
+        const params = new URLSearchParams(window.location.search);
+        const apps = params.get("apps");
+
+        // Tampilkan hasil di halaman
+        document.getElementById("output").innerText = apps ? `Parameter apps: ${apps}` : "Tidak ada parameter.";
+    </script>
+</body>
+</html>
